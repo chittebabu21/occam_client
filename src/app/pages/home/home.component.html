@@ -4,6 +4,8 @@
     <div class="form-container d-flex flex-column flex-grow-1 mx-3 my-4">
         <p class="title text-start">Onsite Exhibitors Registration</p>
 
+        <app-success-alert class="alert" *ngIf="showAlert" [uniqueId]="uniqueId" (close)="handleClose()"></app-success-alert>
+
         <form [formGroup]="eventSelectionForm" (ngSubmit)="onSubmit()">
             <div class="event-form">
                 <div class="form-group">
@@ -31,9 +33,14 @@
                 </div>
             </div>
 
-            <app-success-alert *ngIf="showAlert" [uniqueId]="uniqueId" (close)="handleClose()"></app-success-alert>
-
             <hr *ngIf="checkIsSelected()">
+
+            <p *ngIf="checkIsSelected()" class="info my-1">* All fields are mandatory.</p>
+
+            <div *ngIf="isLoading" class="d-flex flex-column">
+                <p class="note text-start m-0">Note:</p>
+                <p class="note-text text-wrap text-start">Do not refresh the page as doing so may result in the loss of all your records.</p>
+            </div>
 
             <div *ngIf="exhibitors.length > 0" formArrayName="exhibitors" class="event-form p-0">
 
@@ -42,15 +49,16 @@
                         <div class="form-group">
                             <div class="form-header d-flex justify-content-between align-items-center py-2 px-3">
                                 <label class="form-label">Exhibitor #{{ i + 1 }}</label>
-                                <button class="btn btn-link" (click)="removeExhibitor(i)">Remove</button>
+                                <button class="remove-btn btn btn-link" (click)="removeExhibitor(i)">Remove</button>
                             </div>
                             
                             <div class="d-flex flex-column p-3">
-                                <p class="text-danger" *ngIf="errorMsg">{{ errorMsg }}</p>
+                                <p class="text-danger m-0" *ngIf="errorMsg">{{ errorMsg }}</p>
 
                                 <div class="d-flex flex-column my-2">
                                     <label for="email" class="radio-label m-0">Email</label>
                                     <input class="form-control" type="text" formControlName="email">
+                                    <p *ngIf="emailError" class="text-danger m-0">{{ emailError }}</p>
                                 </div>
                                 <div class="d-flex flex-column my-2">
                                     <label for="nameOnBadge" class="radio-label m-0">Name on Badge</label>
@@ -80,7 +88,6 @@
         </form>
 
         <div *ngIf="checkIsSelected()">
-
             <div class="btn-container d-flex justify-content-center align-items-center">
                 <button class="btn btn-sm d-flex align-items-center" type="button" (click)="addExhibitor()">
                     <div class="add-icon">

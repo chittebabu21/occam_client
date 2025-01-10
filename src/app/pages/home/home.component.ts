@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   companyList!: Company[];
   countryList!: string[];
   errorMsg = '';
+  emailError = '';
   isLoading = false;
   showAlert = false;
   uniqueId = '';
@@ -148,26 +149,43 @@ export class HomeComponent implements OnInit {
           this.exhibitorService.postRequest(request).subscribe({
             next: (res: any) => {
               const jsonResponse = res as { message: string; status: boolean; user_id: string; };
+              console.log(jsonResponse);
+
               this.isLoading = false;
               this.uniqueId = request.S_group_reg_id;
               this.showAlert = true;
-              console.log(jsonResponse);
+              
+              this.errorMsg = '';
+              this.emailError = '';
+
+              exhibitorForm.reset();
+              this.eventSelectionForm.reset();
             },
             error: (err: any) => {
               console.log(err);
               this.isLoading = false;
+              this.emailError = '';
               this.errorMsg = 'Error in submitting request';
             }
           });
         } else {
           console.log('Invalid form.');
-          this.isLoading = false;
-          this.errorMsg = 'Please complete all fields.';
+
+          if (exhibitorForm.get('email')?.invalid) {
+            this.isLoading = false;
+            this.errorMsg = '';
+            this.emailError = 'Invalid email address.';
+          } else {
+            this.isLoading = false;
+            this.emailError = '';
+            this.errorMsg = 'Please complete all fields.';
+          }
         }
       })
     } else {
       console.log('Company or event not selected.');
       this.isLoading = false;
+      this.emailError = '';
       this.errorMsg = 'Please select an event and company.';
     }
   }

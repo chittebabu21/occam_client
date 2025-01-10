@@ -117,6 +117,32 @@ select .form-select {
     left: 50%;
 }
 
+.remove-btn {
+    color: #EE4036;
+}
+
+.note {
+    font-family: "Montserrat", serif;
+    font-style: normal;
+    color: #EE4036;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.note-text, .info {
+    font-family: "Montserrat", serif;
+    font-style: normal;
+    color: #6E6B7B;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.alert {
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+}
+
 @media only screen and (min-width: 500px) {
     .form-container {
         display: flex;

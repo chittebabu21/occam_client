@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './pages/home/home.component';
 import { BannerComponent } from './components/banner/banner.component';
-import { ExhibitorFormComponent } from './components/exhibitor-form/exhibitor-form.component';
 import { SuccessAlertComponent } from './components/success-alert/success-alert.component';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { SuccessAlertComponent } from './components/success-alert/success-alert.
     AppComponent,
     HomeComponent,
     BannerComponent,
-    ExhibitorFormComponent,
     SuccessAlertComponent
   ],
   imports: [
