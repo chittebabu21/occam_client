@@ -1,0 +1,109 @@
+<div class="container d-flex flex-column m-0">
+    <app-banner></app-banner>
+
+    <div class="form-container d-flex flex-column flex-grow-1 mx-3 my-4">
+        <p class="title text-start">Onsite Exhibitors Registration</p>
+
+        <form [formGroup]="eventSelectionForm" (ngSubmit)="onSubmit()">
+            <div class="event-form">
+                <div class="form-group">
+                    <label class="form-label">Event Selection</label>
+                    <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center">
+                            <input type="radio" formControlName="event" value="FHA-Food & Beverage" id="fha">
+                            <label for="fha" class="radio-label m-0">FHA-FOOD & Beverage</label>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <input type="radio" formControlName="event" value="Prowine Singapore" id="prowine">
+                            <label for="prowine" class="radio-label m-0">Prowine Singapore</label>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group" *ngIf="companyList">
+                    <label for="company" class="form-label">Company</label>
+                    <p class="helper-text">If you are unable to find your company name, please approach our Exhibitor Team for assistance.</p>
+    
+                    <select formControlName="company" id="company" class="form-select">
+                        <option value="">Please select</option>
+                        <option *ngFor="let company of filterCompany(eventSelectionForm.get('event')!.value)"  [value]="company.S_company">{{ company.S_company }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <app-success-alert *ngIf="showAlert" [uniqueId]="uniqueId" (close)="handleClose()"></app-success-alert>
+
+            <hr *ngIf="checkIsSelected()">
+
+            <div *ngIf="exhibitors.length > 0" formArrayName="exhibitors" class="event-form p-0">
+
+                <div *ngFor="let exhibitor of exhibitors.controls; let i = index;">
+                    <div [formGroupName]="i"> 
+                        <div class="form-group">
+                            <div class="form-header d-flex justify-content-between align-items-center py-2 px-3">
+                                <label class="form-label">Exhibitor #{{ i + 1 }}</label>
+                                <button class="btn btn-link" (click)="removeExhibitor(i)">Remove</button>
+                            </div>
+                            
+                            <div class="d-flex flex-column p-3">
+                                <p class="text-danger" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+                                <div class="d-flex flex-column my-2">
+                                    <label for="email" class="radio-label m-0">Email</label>
+                                    <input class="form-control" type="text" formControlName="email">
+                                </div>
+                                <div class="d-flex flex-column my-2">
+                                    <label for="nameOnBadge" class="radio-label m-0">Name on Badge</label>
+                                    <input class="form-control" type="text" formControlName="nameOnBadge">                                  
+                                </div>
+                                <div class="d-flex flex-column my-2">
+                                    <label for="jobTitle" class="radio-label m-0">Job Title</label>
+                                    <input class="form-control" type="text" formControlName="jobTitle">                                  
+                                </div>
+                                <div class="d-flex flex-column my-2">
+                                    <label for="country" class="radio-label m-0">Country</label>
+
+                                    <select formControlName="country" id="country" class="form-select">
+                                        <option value="">Please select</option>
+                                        <option *ngFor="let country of countryList"  [value]="country">{{ country }}</option>
+                                    </select>                                
+                                </div>
+                                <div class="d-flex flex-column my-2">
+                                    <label for="company" class="radio-label m-0">Company on Badge</label>
+                                    <input class="form-control" type="text" formControlName="company">                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div *ngIf="checkIsSelected()">
+
+            <div class="btn-container d-flex justify-content-center align-items-center">
+                <button class="btn btn-sm d-flex align-items-center" type="button" (click)="addExhibitor()">
+                    <div class="add-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#EE4036" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        </svg>
+                    </div>
+                    
+                    <p class="btn-text mb-0 ms-2">Add Exhibitor</p>
+                </button>
+            </div>  
+
+            <hr>
+
+            <div class="spinner-border text-dark" role="status" *ngIf="isLoading">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button class="register-btn btn btn-lg mx-2" (click)="onSubmit()" [disabled]="isLoading">
+                    <p class="fw-normal m-0">Register</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

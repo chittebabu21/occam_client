@@ -1,0 +1,126 @@
+.container {
+    padding: 0;
+    width: 100%;
+    min-width: 100vw;
+    height: 100%;
+    min-height: 100vh;
+    background-color: #F1F1F1;
+}
+
+.form-container {
+    overflow-y: scroll;
+}
+
+.title {
+    font-family: "Montserrat", serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    color: #EE4036;
+}
+
+.add-icon {
+    border-radius: 50%;
+    border: 1px solid #EE4036;
+    width: fit-content;
+}
+
+.btn-text {
+    font-family: "Montserrat", serif;
+    font-style: normal;
+    color: #EE4036;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.event-form {
+    background-color: white;
+    border-radius: 9px;
+    padding: 18px;
+    margin-bottom: 14px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+  
+.form-label {
+    color: #6E6B7B;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-header {
+    background-color: #FDE8E7;
+    border-radius: 9px;
+}
+
+.form-header .form-label {
+    color: #6E6B7B;
+    font-weight: bold;
+    display: block;
+    font-size: 16px;
+}
+  
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+.radio-label {
+    font-family: "Montserrat", serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: #6E6B7B;
+}
+  
+label {
+    font-family: "Montserrat", serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #6E6B7B;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+  
+.helper-text {
+    font-family: "Montserrat", serif;
+    font-size: 11px;
+    color: #6E6B7B;
+    margin-bottom: 5px;
+}
+  
+select .form-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-btn {
+    background-color: #EE4036;
+    border-radius: 9px;
+}
+
+.register-btn p {
+    font-family: "Montserrat", serif;
+    font-size: 16px;
+    color: white;
+}
+
+.spinner-border {
+    z-index: 5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+@media only screen and (min-width: 500px) {
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,0 +1,18 @@
+<ngb-alert [dismissible]="true" type="light" (closed)="close.emit()">
+    <div class="d-flex flex-column justify-content-center p-3">
+        <p class="label mx-3 text-center">Registration Completed</p>
+        <p class="sub-label mx-2 text-center">Your unique code is</p>
+        <p class="code mx-2 text-center">{{ uniqueId | uppercase }}</p>
+
+        <div class="d-grid gap-2">
+            <button class="save-btn btn btn-lg mx-2">
+                <p class="fw-normal m-0">Save as Image</p>
+            </button>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="back-btn btn btn-link btn-lg mx-2" (click)="onClose()">
+                <p class="fw-normal m-0">Back to Home</p>
+            </button>
+        </div>
+    </div>
+</ngb-alert>
